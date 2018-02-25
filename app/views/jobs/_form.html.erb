@@ -1,0 +1,51 @@
+<%= form_with model: job do |f| %>
+<% if job.errors.any? %>
+<div class="alert alert-danger">
+  <h4><%= pluralize(job.errors.count, "error") %>.</h4>
+  <ul>
+    <% job.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<%= form_group_tag(job.errors[:client]) do %>
+  <%= f.label :client %>
+  <%= f.text_field :client, class: "form-control", placeholder: "Client name" %>
+<% end %>
+
+<%= form_group_tag(job.errors[:description]) do %>
+  <%= f.label :description %>
+  <%= f.text_area :description, rows: 1, class: "form-control", placeholder: "Job description" %>
+<% end %>
+
+<%= form_group_tag(job.errors[:date]) do %>
+  <%= f.label :date %>
+  <%= f.date_field :date, class: "form-control" %>
+<% end %>
+
+<%= form_group_tag(job.errors[:location]) do %>
+  <%= f.label :location %>
+  <%= f.text_field :location, class: "form-control", placeholder: "Location" %>
+<% end %>
+
+<%= form_group_tag(job.errors[:amount]) do %>
+  <%= f.label :amount %>
+  <%= f.number_field :amount %>
+<% end %>
+
+<%= form_group_tag(job.errors[:paid]) do %>
+  <%= f.label :paid %>
+  <%= f.check_box :client, class: "form-control" %>
+<% end %>
+
+<%= form_group_tag(job.errors[:notes]) do %>
+  <%= f.label :notes %>
+  <%= f.text_area :notes, rows: 4, class: "form-control", placeholder: "Additional notes" %>
+<% end %>
+
+<div class="form-group">
+  <%= f.submit "Save", class: "btn btn-success" %>
+</div>
+
+<% end %>
