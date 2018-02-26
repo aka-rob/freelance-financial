@@ -1,0 +1,27 @@
+<h1>Current workload</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Client</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Fee</th>
+      <th>Paid</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @jobs.each do |job| %>
+    <tr>
+      <td><%= job.date %></td>
+      <td><%= job.client %></td>
+      <td><%= job.description %></td>
+      <td><%= job.location %></td>
+      <td><%= job.amount %></td>
+      <td><%= job.paid %></td>
+      <td><%= job.notes %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

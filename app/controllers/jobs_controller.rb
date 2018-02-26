@@ -15,6 +15,7 @@ class JobsController < ApplicationController
   def create
     @job = Job.new(job_params)
     # @job.user = current_user
+   
 
     if @job.save
       flash[:notice] = "The job was added!"
@@ -57,15 +58,7 @@ class JobsController < ApplicationController
   private
   
   def job_params
-    params.require(:job).permit(
-      :date,
-      :client,
-      :description,
-      :location,
-      :amount,
-      :paid,
-      :notes
-      )
+    params.require(:job).permit(:date, :client, :description, :location, :amount, :paid, :notes)
   end
 
 end
