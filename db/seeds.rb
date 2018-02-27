@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+10.times do
+  Job.create!(
+    date: Faker::Date.between(2.years.ago, Date.today),
+    client: Faker::Hipster.sentence(2),
+    description: Faker::Hipster.paragraph,
+    location: Faker::Hipster.sentence(2),
+    amount: Faker::Number.decimal(2),
+    paid: false,
+    notes: Faker::Hipster.paragraph
+  )
+end
+
+puts "#{Job.count} jobs created."
