@@ -95,7 +95,7 @@ RSpec.describe JobsController, type: :controller do
       let(:new_job) { create(:job) }
     
     it 'updates job with expected attirbutes' do
-       put :update, params: { id: my_job.id, job: { date: new_job.date, client: new_job.client, description: new_job.description, location: new_job.location, amount: new_job.amount, paid: new_job.paid, notes: new_job.notes } }
+      put :update, params: { id: my_job.id, job: { date: new_job.date, client: new_job.client, description: new_job.description, location: new_job.location, amount: new_job.amount, paid: new_job.paid, notes: new_job.notes } }
       updated_job = assigns(:job)
       expect(updated_job.id).to eq my_job.id
       expect(updated_job.date).to eq new_job.date
@@ -108,17 +108,21 @@ RSpec.describe JobsController, type: :controller do
     end
 
     it 'redirects to the updated job' do
-      
+      put :update, params: { id: my_job.id, job: { date: new_job.date, client: new_job.client, description: new_job.description, location: new_job.location, amount: new_job.amount, paid: new_job.paid, notes: new_job.notes } }
+      expect(response).to redirect_to my_job
     end
   end
 
   describe 'DELETE destroy' do
     it 'deletes the job' do
-      
+      delete :destroy, params: { id: my_job.id }
+      count = Job.where( { id: my_job.id } ).size
+      expect(count).to eq 0
     end
 
     it 'redirects to jobs index' do
-      
+      delete :destroy, params: { id: my_job.id }
+      expect(response).to redirect_to jobs_path
     end
   end
 end
