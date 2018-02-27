@@ -1,11 +1,14 @@
+require_relative "../services/job_service.rb"
+
 class JobsController < ApplicationController
   
+  # will be replaced by DashboardController#index
   def index
-    @jobs = Job.all
+    @jobs = JobService.get_all_jobs
   end
 
   def show
-    @job = Job.find(params[:id])
+    @job = JobService.find_job(params[:id])
   end
 
   def new
@@ -13,26 +16,24 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.new(job_params)
-    # @job.user = current_user
-   
+    current_user = nil # change when user model implemented
+    @job = JobService.new_job(job_params, current_user)
 
     if @job.save
       flash[:notice] = "The job was added!"
       redirect_to @job
     else
-      flash.nw[:alert] = "There was an error saving your job, please try again."
+      flash.now[:alert] = "There was an error saving your job, please try again."
       render :new
     end
   end
 
   def edit
-    @job = Job.find(params[:id])
+    @job = JobService.find_job(params[:id])
   end
 
   def update
-    @job = Job.find(params[:id])
-    @job.assign_attributes(job_params)
+    @job = JobService.update_job(params[:id], job_params)
 
     if @job.save
       flash[:notice] = "Job details were updated."
@@ -44,7 +45,7 @@ class JobsController < ApplicationController
   end
 
   def destroy
-    @job = Job.find(params[:id])
+    @job = JobService.find_job(params[:id])
 
     if @job.destroy
       flash[:notice] = "Your job has successfully been deleted."

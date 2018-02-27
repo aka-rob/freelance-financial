@@ -3,17 +3,18 @@ require 'rails_helper'
 RSpec.describe JobsController, type: :controller do
   let(:my_job) { create(:job) }
 
-  describe "GET index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
+  # GET index will be handled by dashboard_controller#index
+  # describe "GET index" do
+  #   it "returns http success" do
+  #     get :index
+  #     expect(response).to have_http_status(:success)
+  #   end
 
-    it "assigns Job.all to @job" do
-      get :index
-      expect(assigns(:jobs)).to eq([my_job])
-    end
-  end
+  #   it "assigns Job.all to @job" do
+  #     get :index
+  #     expect(assigns(:jobs)).to eq([my_job])
+  #   end
+  # end
 
   describe "GET show" do
     it "returns http success" do
