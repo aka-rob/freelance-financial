@@ -1,26 +1,34 @@
 <h1>Current workload</h1>
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Client</th>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Fee</th>
-      <th>Paid</th>
-      <th>Notes</th>
+      <th scope="col">Date</th>
+      <th scope="col">Client</th>
+      <th scope="col">Description</th>
+      <th scope="col">Location</th>
+      <th scope="col">Fee</th>
+      <th scope="col">Paid</th>
+      <th scope="col">Notes</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @jobs.each do |job| %>
     <tr>
-      <td><%= job.date %></td>
+      <td class="table--nowrap"><%= job.date.strftime('%a, %b %d, %G') %></td>
       <td><%= job.client %></td>
       <td><%= job.description %></td>
       <td><%= job.location %></td>
-      <td><%= job.amount %></td>
-      <td><%= job.paid %></td>
+      <td><%= number_to_currency(job.amount) %></td>
+      <td>
+        <% if job.paid %>
+          Paid
+        <% else %>
+          Payment Outstanding
+        <% end %>
+      </td>
       <td><%= job.notes %></td>
+      <td class="table--nowrap"><%= link_to "Edit", edit_job_path(job) %> | <%= link_to "Delete", job, method: :delete, data: {confirm: 'Are you shure you want to delete this job?'} %></td>
     </tr>
     <% end %>
   </tbody>
