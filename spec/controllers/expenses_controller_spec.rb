@@ -40,17 +40,17 @@ RSpec.describe ExpensesController, type: :controller do
 
   describe 'GET edit' do
     it 'returns HTTP success' do
-      get :edit, params: { id: my_expense.id }
+      get :edit, params: { job_id: my_job.id, id: my_expense.id }
       expect(response).to have_http_status(:success)
     end
 
     it 'renders the #edit view' do
-      get :edit, params: { id: my_expense.id }
+      get :edit, params: { job_id: my_job.id, id: my_expense.id }
       expect(response).to render_template :edit
     end
 
     it 'assigns expense to be updated to @expense' do
-      get :edit, params: { id: my_expense.id }
+      get :edit, params: { job_id: my_job.id, id: my_expense.id }
       expense_instance = assigns(:expense)
 
       expect(expense_instance.id).to eq my_expense.id
