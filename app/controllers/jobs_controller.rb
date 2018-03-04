@@ -1,14 +1,10 @@
 require_relative "../services/job_service.rb"
 
 class JobsController < ApplicationController
-  
+
   # will be replaced by DashboardController#index
   def index
     @jobs = JobService.get_all_jobs
-  end
-
-  def show
-    @job = JobService.find_job(params[:id])
   end
 
   def new
@@ -21,7 +17,7 @@ class JobsController < ApplicationController
 
     if @job.save
       flash[:notice] = "The job was added!"
-      redirect_to @job
+      redirect_to jobs_path
     else
       flash.now[:alert] = "There was an error saving your job, please try again."
       render :new
@@ -33,11 +29,11 @@ class JobsController < ApplicationController
   end
 
   def update
-    @job = JobService.update_job(params[:id], job_params)
+    @job = JobService.find_job(params[:id])
 
-    if @job.save
+    if @job.update(job_params)
       flash[:notice] = "Job details were updated."
-      redirect_to @job
+      redirect_to jobs_path
     else
       flash.now[:alert] = "There was an error updating the job, please try again."
       render :edit
@@ -57,7 +53,7 @@ class JobsController < ApplicationController
   end
 
   private
-  
+
   def job_params
     params.require(:job).permit(:date, :client, :description, :location, :amount, :paid, :notes)
   end

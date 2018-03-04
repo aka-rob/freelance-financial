@@ -1,6 +1,6 @@
 module JobService
   def self.get_all_jobs
-    return Job.all
+    return Job.order(:date)
   end
 
   def self.find_job(id)
@@ -13,9 +13,10 @@ module JobService
     return job
   end
 
-  def self.update_job(id, job_params)
-    job = Job.find_by(id)
-    job.assign_attributes(job_params)
-    return job
-  end
+  # Not working currently
+  # def self.update_job(id, job_params)
+  #   job = Job.find_by(id)
+  #   job.assign_attributes(job_params)
+  #   return job
+  # end
 end

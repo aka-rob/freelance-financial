@@ -7,7 +7,7 @@ FactoryBot.define do
     description Faker::Hipster.paragraph
     location Faker::Hipster.sentence(2)
     amount Faker::Number.decimal(2)
-    paid false
+    paid Faker::Boolean.boolean
     notes Faker::Hipster.paragraph
   end
 end

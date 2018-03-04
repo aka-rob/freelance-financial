@@ -16,23 +16,6 @@ RSpec.describe JobsController, type: :controller do
   #   end
   # end
 
-  describe "GET show" do
-    it "returns http success" do
-      get :show, params: { id: my_job.id }
-      expect(response).to have_http_status(:success)
-    end
-
-    it "renders the #show view" do
-      get :show, params: { id: my_job.id }
-      expect(response).to render_template :show
-    end
-
-    it "assigns my_job to @job" do
-      get :show, params: { id: my_job.id }
-      expect(assigns(:job)).to eq(my_job)
-    end
-  end
-
   describe "GET new" do
     it 'returns http success' do
       get :new
@@ -60,9 +43,9 @@ RSpec.describe JobsController, type: :controller do
       expect(assigns(:job)).to eq Job.last
     end
 
-    it 'redirects to the new job' do
+    it 'redirects to the index' do
       post :create, params: { job: {date: my_job.date, client: my_job.client, description: my_job.description, location: my_job.location, amount: my_job.amount, paid: my_job.paid, notes: my_job.notes } }
-      expect(response).to redirect_to Job.last
+      expect(response).to redirect_to action: :index
     end
   end
 
@@ -94,7 +77,7 @@ RSpec.describe JobsController, type: :controller do
 
   describe 'PUT update' do
       let(:new_job) { create(:job) }
-    
+
     it 'updates job with expected attirbutes' do
       put :update, params: { id: my_job.id, job: { date: new_job.date, client: new_job.client, description: new_job.description, location: new_job.location, amount: new_job.amount, paid: new_job.paid, notes: new_job.notes } }
       updated_job = assigns(:job)
@@ -110,7 +93,7 @@ RSpec.describe JobsController, type: :controller do
 
     it 'redirects to the updated job' do
       put :update, params: { id: my_job.id, job: { date: new_job.date, client: new_job.client, description: new_job.description, location: new_job.location, amount: new_job.amount, paid: new_job.paid, notes: new_job.notes } }
-      expect(response).to redirect_to my_job
+      expect(response).to redirect_to action: :index
     end
   end
 
