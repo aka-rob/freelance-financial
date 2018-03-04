@@ -7,17 +7,17 @@ RSpec.describe ExpensesController, type: :controller do
 
   describe 'GET new' do
     it 'returns HTTP success' do
-      get :new
+      get :new, params: { job_id: my_job.id }
       expect(response).to have_http_status(:success)
     end
 
     it 'renders the #new view' do
-      get :new
+      get :new, params: { job_id: my_job.id }
       expect(response).to render_template :new
     end
 
     it 'instantiates @expense' do
-      get :new
+      get :new, params: { job_id: my_job.id }
       expect(assigns(:expense)).not_to be_nil
     end
   end

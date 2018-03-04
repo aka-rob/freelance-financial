@@ -1,7 +1,8 @@
 class ExpensesController < ApplicationController
 
   def new
-    @expense = Expense.new
+    @job = Job.find(params[:job_id])
+    @expense = @job.expenses.new
   end
 
   def create
