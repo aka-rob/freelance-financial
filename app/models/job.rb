@@ -1,5 +1,5 @@
 class Job < ApplicationRecord
-  # has_many :expenses
+  has_many :expenses
 
   validates :date, presence: true
   validates :client, presence: true

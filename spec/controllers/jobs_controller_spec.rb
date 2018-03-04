@@ -35,7 +35,7 @@ RSpec.describe JobsController, type: :controller do
 
   describe 'POST create' do
     it 'increases the count of Job by 1' do
-      expect{ post :create, params: {date: my_job.date, client: my_job.client, description: my_job.description, location: my_job.location, amount: my_job.amount, paid: my_job.paid, notes: my_job.notes } }
+      expect{ post :create, params: { job: {date: Faker::Date.between(2.years.ago, Date.today), client: Faker::Hipster.sentence(2), description: Faker::Hipster.paragraph, location: Faker::Hipster.sentence(2), amount: Faker::Number.decimal(2), paid: Faker::Boolean.boolean, notes: Faker::Hipster.paragraph } } }.to change(Job,:count).by(1)
     end
 
     it "assigns the new job to @job" do
@@ -91,7 +91,7 @@ RSpec.describe JobsController, type: :controller do
       expect(updated_job.notes).to eq new_job.notes
     end
 
-    it 'redirects to the updated job' do
+    it 'redirects to the index' do
       put :update, params: { id: my_job.id, job: { date: new_job.date, client: new_job.client, description: new_job.description, location: new_job.location, amount: new_job.amount, paid: new_job.paid, notes: new_job.notes } }
       expect(response).to redirect_to action: :index
     end
