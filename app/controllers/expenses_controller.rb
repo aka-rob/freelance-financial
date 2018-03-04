@@ -23,8 +23,16 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
   end
 
-  def create
-    #code
+  def update
+    @expense = Expense.find(params[:id])
+
+    if @expense.update(expense_params)
+      flash[:notice] = "Exense was updated!"
+      redirect_to job_expenses_path(params[:job_id])
+    else
+      flash.now[:alert] = "There was an error updating your expense, please try again."
+      render :edit
+    end
   end
 
   private

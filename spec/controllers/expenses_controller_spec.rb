@@ -64,7 +64,7 @@ RSpec.describe ExpensesController, type: :controller do
 
   describe "PUT update" do
     it 'updates job with expected attributes' do
-      put :update, params: { id: my_expense.id, expense: { name: new_expense.name, amount: new_expense.amount, date: new_expense.date, category: new_expense.category, job_id: new_expense.job_id } }
+      put :update, params: { job_id: my_job.id, id: my_expense.id, expense: { name: new_expense.name, amount: new_expense.amount, date: new_expense.date, category: new_expense.category } }
       updated_expense = assigns(:expense)
 
       expect(updated_expense.id).to eq my_expense.id
@@ -72,12 +72,11 @@ RSpec.describe ExpensesController, type: :controller do
       expect(updated_expense.amount).to eq new_expense.amount
       expect(updated_expense.date).to eq new_expense.date
       expect(updated_expense.category).to eq new_expense.category
-      expect(updated_expense.job_id).to eq new_expense.job_id
     end
 
     it 'redirects to the updated expense' do
-      put :update, params: { id: my_expense.id, expense: { name: new_expense.name, amount: new_expense.amount, date: new_expense.date, category: new_expense.category, job_id: new_expense.job_id } }
-      expect(response).to redirect_to @expense
+      put :update, params: { job_id: my_job.id, id: my_expense.id, expense: { name: new_expense.name, amount: new_expense.amount, date: new_expense.date, category: new_expense.category } }
+      expect(response).to redirect_to job_expenses_path( my_job.id )
     end
   end
 
