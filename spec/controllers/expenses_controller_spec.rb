@@ -82,14 +82,14 @@ RSpec.describe ExpensesController, type: :controller do
 
   describe "DELETE destroy" do
     it 'deletes the expense' do
-      delete :destroy, params: { id: my_expense.id }
+      delete :destroy, params: { job_id: my_job.id, id: my_expense.id }
       count = Expense.where( {id: my_expense.id } ).size
       expect(count).to eq 0
     end
 
     it 'redirects to related job' do
-      delete :destroy, params: { id: my_expense.id }
-      expect(response).to redirect_to @job
+      delete :destroy, params: { job_id: my_job.id, id: my_expense.id }
+      expect(response).to redirect_to job_expenses_path( my_job.id )
     end
   end
 end

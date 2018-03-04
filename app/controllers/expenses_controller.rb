@@ -35,6 +35,18 @@ class ExpensesController < ApplicationController
     end
   end
 
+  def destroy
+    @expense = Expense.find(params[:id])
+
+    if @expense.destroy
+      flash[:notice] = "Expense was successfully deleted."
+      redirect_to job_expenses_path(params[:job_id])
+    else
+      flash[:alert] = "There was an error deleting your expense, please try again."
+      redirect_to job_expenses_path(params[:job_id])
+    end
+  end
+
   private
 
   def expense_params
