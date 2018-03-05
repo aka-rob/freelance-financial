@@ -18,4 +18,18 @@
   )
 end
 
+job_ids = Job.all.ids
+
+50.times do
+  Expense.create!(
+    name: Faker::Coffee.blend_name,
+    amount: Faker::Number.decimal(2),
+    date: Faker::Date.between(2.years.ago, Date.today),
+    category: ["travel", "misc", "supplies"].sample,
+    job_id: job_ids.sample
+  )
+
+end
+
 puts "#{Job.count} jobs created."
+puts "#{Expense.count} expenses created."
