@@ -11,6 +11,10 @@ class JobsController < ApplicationController
     @job = Job.new
   end
 
+  def show
+    @job = JobService.find_job(params[:id])
+  end
+
   def create
     current_user = nil # change when user model implemented
     @job = JobService.new_job(job_params, current_user)

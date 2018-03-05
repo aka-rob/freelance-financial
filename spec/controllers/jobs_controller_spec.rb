@@ -33,6 +33,23 @@ RSpec.describe JobsController, type: :controller do
     end
   end
 
+  describe "GET show" do
+    it 'returns http success' do
+      get :show, params: { id: my_job.id }
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'renders the #show view' do
+      get :show, params: { id: my_job.id }
+      expect(response).to render_template :show
+    end
+
+    it 'assigns my_job to @job' do
+      get :show, params: { id: my_job.id }
+      expect(assigns(:job)).to eq(my_job)
+    end
+  end
+
   describe 'POST create' do
     it 'increases the count of Job by 1' do
       expect{ post :create, params: { job: {date: Faker::Date.between(2.years.ago, Date.today), client: Faker::Hipster.sentence(2), description: Faker::Hipster.paragraph, location: Faker::Hipster.sentence(2), amount: Faker::Number.decimal(2), paid: Faker::Boolean.boolean, notes: Faker::Hipster.paragraph } } }.to change(Job,:count).by(1)
