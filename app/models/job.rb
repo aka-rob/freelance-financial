@@ -5,5 +5,11 @@ class Job < ApplicationRecord
   validates :client, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
-  # job.expenses.sum(:amount)
+  def profit
+    return amount - expenses.sum(:amount)
+  end
+
+  def sum_expenses
+    return expenses.sum(:amount)
+  end
 end

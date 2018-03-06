@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FreelanceFinancial</title>
+    <title>Freelance Financial</title>
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +12,8 @@
   <body>
     <div class="container">
       <ul class="nav">
-        <li class="nav-item"><%= link_to  "Home", root_path, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to  "Freelance Financial", root_path, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to  "Dashboard", jobs_path, class: 'nav-link' %></li>
         <li class="nav-item"><%= link_to  "Sign In", "#", class: 'nav-link' %></li>
       </ul>
       <% if flash[:notice] %>
@@ -26,6 +27,7 @@
           <%= flash[:alert] %>
         </div>
       <% end %>
+      <hr>
       <%= yield %>
     </div>
   </body>
