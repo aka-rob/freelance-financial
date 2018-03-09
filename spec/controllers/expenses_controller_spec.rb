@@ -34,7 +34,7 @@ RSpec.describe ExpensesController, type: :controller do
 
     it "redirects to the job's expenses" do
       post :create, params: { job_id: my_job.id, expense: { name: my_expense.name, amount: my_expense.amount, date: my_expense.date, category: my_expense.category } }
-      expect(response).to redirect_to job_expenses_path(my_job.id)
+      expect(response).to redirect_to job_path(my_job.id)
     end
   end
 
@@ -89,7 +89,7 @@ RSpec.describe ExpensesController, type: :controller do
 
     it 'redirects to related job' do
       delete :destroy, params: { job_id: my_job.id, id: my_expense.id }
-      expect(response).to redirect_to job_expenses_path( my_job.id )
+      expect(response).to redirect_to job_path( my_job.id )
     end
   end
 end

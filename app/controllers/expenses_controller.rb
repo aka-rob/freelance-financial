@@ -12,7 +12,7 @@ class ExpensesController < ApplicationController
 
     if @expense.save
       flash[:notice] = "The expense was added!"
-      redirect_to job_expenses_path(params[:job_id])
+      redirect_to job_path(params[:job_id])
     else
       flash.now[:alert] = "There was an error saving your expense, please try again."
       render :new
@@ -40,10 +40,10 @@ class ExpensesController < ApplicationController
 
     if @expense.destroy
       flash[:notice] = "Expense was successfully deleted."
-      redirect_to job_expenses_path(params[:job_id])
+      redirect_to job_path(params[:job_id])
     else
       flash[:alert] = "There was an error deleting your expense, please try again."
-      redirect_to job_expenses_path(params[:job_id])
+      redirect_to job_path(params[:job_id])
     end
   end
 
