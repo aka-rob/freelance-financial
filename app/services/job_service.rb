@@ -1,6 +1,6 @@
 module JobService
-  def self.get_all_jobs
-    return Job.order(:date)
+  def self.get_user_jobs
+    return Job.all.order(:date)
   end
 
   def self.find_job(id)
@@ -9,7 +9,7 @@ module JobService
 
   def self.new_job(job_params, user)
     job = Job.new(job_params)
-    # job.user = user
+    job.user_id = user.id
     return job
   end
 

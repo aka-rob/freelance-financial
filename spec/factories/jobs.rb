@@ -9,5 +9,6 @@ FactoryBot.define do
     amount Faker::Number.decimal(2)
     paid Faker::Boolean.boolean
     notes Faker::Hipster.paragraph
+    user
   end
 end

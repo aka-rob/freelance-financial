@@ -1,8 +1,8 @@
 require_relative "../services/job_service.rb"
 
 class JobsController < ApplicationController
+  before_action :authenticate_user!
 
-  # will be replaced by DashboardController#index
   def index
     @jobs = JobService.get_all_jobs
   end
@@ -16,7 +16,6 @@ class JobsController < ApplicationController
   end
 
   def create
-    current_user = nil # change when user model implemented
     @job = JobService.new_job(job_params, current_user)
 
     if @job.save

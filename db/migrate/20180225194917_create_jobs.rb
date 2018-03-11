@@ -8,6 +8,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.decimal :amount
       t.boolean :paid
       t.text :notes
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

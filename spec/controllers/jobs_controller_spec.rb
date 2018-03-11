@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe JobsController, type: :controller do
+  let(:my_user) { create(:user) }
   let(:my_job) { create(:job) }
+
+  before do
+    sign_in my_user
+  end
 
   describe "GET index" do
     it "returns http success" do
@@ -9,7 +14,7 @@ RSpec.describe JobsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "assigns Job.all to @job" do
+    it "assigns Job.where(:user_id) to @jobs" do
       get :index
       expect(assigns(:jobs)).to eq([my_job])
     end

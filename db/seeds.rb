@@ -6,6 +6,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create!(
+  email: 'user_one@example.com',
+  password: 'helloworld'
+)
+
+User.create!(
+  email: 'user_two@example.com',
+  password: 'helloworld'
+)
+
+user_ids = User.all.ids
+
 10.times do
   Job.create!(
     date: Faker::Date.between(2.years.ago, Date.today),
@@ -14,7 +26,8 @@
     location: Faker::Address.city,
     amount: Faker::Number.decimal(2),
     paid: Faker::Boolean.boolean,
-    notes: Faker::Hipster.sentence
+    notes: Faker::Hipster.sentence,
+    user_id: user_ids.sample
   )
 end
 

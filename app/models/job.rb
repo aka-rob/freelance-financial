@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
-  has_many :expenses
+  has_many :expenses, dependent: :destroy
+  belongs_to :user
 
   validates :date, presence: true
   validates :client, presence: true
