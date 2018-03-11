@@ -61,3 +61,4 @@ gem 'bootstrap', '~>4.0.0' # Complete install based on instructions here => http
 gem 'jquery-rails'
 gem 'devise', '~>4.4'
 gem 'pundit', '~>1.1'
+ gem 'figaro', '1.0'
