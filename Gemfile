@@ -59,3 +59,4 @@ end
 gem 'pry-rails', :group => :development
 gem 'bootstrap', '~>4.0.0' # Complete install based on instructions here => https://github.com/twbs/bootstrap-rubygem
 gem 'jquery-rails'
+gem 'devise', '~>4.4'
