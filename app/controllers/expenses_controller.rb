@@ -28,7 +28,7 @@ class ExpensesController < ApplicationController
 
     if @expense.update(expense_params)
       flash[:notice] = "Exense was updated!"
-      redirect_to job_expenses_path(params[:job_id])
+      redirect_to job_path(params[:job_id])
     else
       flash.now[:alert] = "There was an error updating your expense, please try again."
       render :edit

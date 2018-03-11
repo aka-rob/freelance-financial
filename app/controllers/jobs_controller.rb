@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @jobs = JobService.get_all_jobs
+    @jobs = JobService.get_user_jobs(current_user)
   end
 
   def new
@@ -13,6 +13,7 @@ class JobsController < ApplicationController
 
   def show
     @job = JobService.find_job(params[:id])
+    authorize @job
   end
 
   def create
@@ -29,10 +30,12 @@ class JobsController < ApplicationController
 
   def edit
     @job = JobService.find_job(params[:id])
+    authorize @job
   end
 
   def update
     @job = JobService.find_job(params[:id])
+    authorize @job
 
     if @job.update(job_params)
       flash[:notice] = "Job details were updated."
@@ -45,6 +48,7 @@ class JobsController < ApplicationController
 
   def destroy
     @job = JobService.find_job(params[:id])
+    authorize @job
 
     if @job.destroy
       flash[:notice] = "Your job has successfully been deleted."

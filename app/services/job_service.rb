@@ -1,6 +1,6 @@
 module JobService
-  def self.get_user_jobs
-    return Job.all.order(:date)
+  def self.get_user_jobs(user)
+    return Job.where(user_id: user.id).order(:date)
   end
 
   def self.find_job(id)
