@@ -20,7 +20,7 @@ user_ids = User.all.ids
 
 10.times do
   Job.create!(
-    date: Faker::Date.between(2.years.ago, Date.today),
+    date: Faker::Date.between(Date.today.beginning_of_year, Date.today),
     client: Faker::RuPaul.queen,
     description: Faker::Hipster.sentence,
     location: Faker::Address.city,

@@ -1,14 +1,17 @@
+require_relative "../services/job_service.rb"
+require_relative "../services/expense_service.rb"
+
+
 class ExpensesController < ApplicationController
 
   def new
-    @job = Job.find(params[:job_id])
+    @job = JobService.find_job(params[:job_id])
     @expense = @job.expenses.new
   end
 
   def create
-    @job = Job.find(params[:job_id])
-    @expense = @job.expenses.new(expense_params)
-    # @expense.user = current_user
+    @job = JobService.find_job(params[:job_id])
+    @expense = ExpenseService.new_expense(@job, expense_params)
 
     if @expense.save
       flash[:notice] = "The expense was added!"
@@ -20,11 +23,11 @@ class ExpensesController < ApplicationController
   end
 
   def edit
-    @expense = Expense.find(params[:id])
+    @expense = ExpenseService.find_expense(params[:id])
   end
 
   def update
-    @expense = Expense.find(params[:id])
+    @expense = ExpenseService.find_expense(params[:id])
 
     if @expense.update(expense_params)
       flash[:notice] = "Exense was updated!"
@@ -36,7 +39,7 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
-    @expense = Expense.find(params[:id])
+    @expense = ExpenseService.find_expense(params[:id])
 
     if @expense.destroy
       flash[:notice] = "Expense was successfully deleted."

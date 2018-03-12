@@ -1,10 +1,11 @@
 module JobService
+
   def self.get_user_jobs(user)
     return Job.where(user_id: user.id).order(:date)
   end
 
   def self.find_job(id)
-    return Job.find(id)
+    job = Job.find(id)
   end
 
   def self.new_job(job_params, user)
@@ -12,11 +13,4 @@ module JobService
     job.user_id = user.id
     return job
   end
-
-  # Not working currently
-  # def self.update_job(id, job_params)
-  #   job = Job.find_by(id)
-  #   job.assign_attributes(job_params)
-  #   return job
-  # end
 end

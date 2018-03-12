@@ -18,6 +18,7 @@ class JobsController < ApplicationController
 
   def create
     @job = JobService.new_job(job_params, current_user)
+    authorize @job
 
     if @job.save
       flash[:notice] = "The job was added!"
