@@ -7,6 +7,14 @@ class JobPolicy < ApplicationPolicy
   def show?
     record.user == user
   end
+  
+  def new?
+    show?
+  end
+  
+  def create?
+    show?
+  end
 
   def edit?
     show?
