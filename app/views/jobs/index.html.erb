@@ -1,5 +1,11 @@
 <h1>Current workload</h1>
-<%= link_to "New job", new_job_path, class: "btn btn-primary btn-sm mb-3" %>
+<div class="card">
+  <div class="card-body">
+    <strong>Current month profit:</strong> <%= number_to_currency(current_month_profit(@jobs)) %> <small>(Avg: <%= number_to_currency(avg_monthly_profit(@jobs))%>)</small><br>
+    <strong>Current year profit:</strong> <%= number_to_currency(ytd_profit(@jobs)) %>
+  </div>
+</div>
+<%= link_to "New job", new_job_path, class: "btn btn-primary btn-sm my-3" %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -24,7 +30,7 @@
       <td><%= job.location %></td>
       <td><%= number_to_currency(job.amount) %></td>
       <td><%= number_to_currency(job.sum_expenses) %></td>
-      <td><%= job.profit %></td>
+      <td><%= number_to_currency(job.profit) %></td>
       <td><%= job_paid?(job) %></td>
       <td><%= job.notes %></td>
       <td class="table--nowrap"><%= link_to "Edit", edit_job_path(job) %> | <%= link_to "Delete", job, method: :delete, data: {confirm: 'Are you sure you want to delete this job?'} %></td>
