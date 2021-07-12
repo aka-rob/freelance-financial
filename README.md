@@ -1,7 +1,3 @@
-### _UPDATE_
-
-This program was written years ago - now that I'm getting into Python/Flask/Django, my goal is to recreate this in Python in the coming weeks/months!
-
 # Freelance Financial
 
 #### Description
